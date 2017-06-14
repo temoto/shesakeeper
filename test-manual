@@ -1,0 +1,17 @@
+#!/bin/bash
+set -eu
+
+root=$1
+mkdir -p $root
+sleep 1s
+for i in 1 2 3 ; do
+  rm -rf $root/d$i || true
+  sleep 0.3s
+  mkdir $root/d$i
+  sleep 0.3s
+  touch $root/d$i/f$i
+  sleep 0.3s
+  rm -rf $root/d$i
+done
+
+rm -rf $root
