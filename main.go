@@ -51,7 +51,9 @@ func main() {
 			continue
 		}
 		if err = os.Chown(path, -1, int(rootGroup)); err != nil {
-			log.Printf("chown fail path: %s error: %s", path, err.Error())
+			if !os.IsNotExist(err) {
+				log.Printf("chown fail path: %s error: %s", path, err.Error())
+			}
 		}
 	}
 }
