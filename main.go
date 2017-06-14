@@ -21,8 +21,12 @@ func getFileOwnership(path string) (uint32, uint32) {
 
 func main() {
 	flag.Parse()
-	root, err := filepath.Abs(flag.Arg(0))
-	if err != nil {
+	var root string
+	var err error
+	if root, err = filepath.Abs(flag.Arg(0)); err != nil {
+		log.Fatal(err)
+	}
+	if root, err = filepath.EvalSymlinks(root); err != nil {
 		log.Fatal(err)
 	}
 	_, rootGroup := getFileOwnership(root)
