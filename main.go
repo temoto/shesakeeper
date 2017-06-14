@@ -9,8 +9,6 @@ import (
 	"syscall"
 )
 
-type Nothing struct{}
-
 func getFileOwnership(path string) (uint32, uint32) {
 	if info, err := os.Stat(path); err != nil {
 		log.Fatal(err)
@@ -41,7 +39,7 @@ func main() {
 			log.Fatal(err)
 		}
 		if !filepath.HasPrefix(path, root) {
-			log.Fatal("hijack attempted path:", ev.Path(), "abs:", path)
+			log.Fatalf("hijack attempted path: %s abs: %s is not under root: %s", ev.Path(), path, root)
 		}
 		// debug
 		// log.Println("watch event:", ev)
@@ -49,7 +47,7 @@ func main() {
 			continue
 		}
 		if err = os.Chown(path, -1, int(rootGroup)); err != nil {
-			log.Println("chown fail path:", path, "error:", err)
+			log.Printf("chown fail path: %s error: %s", path, err.Error())
 		}
 	}
 }
