@@ -4,3 +4,6 @@
 [submodule "vendor/github.com/rjeczalik/notify"]
 	path = vendor/github.com/rjeczalik/notify
 	url = https://github.com/rjeczalik/notify
+[submodule "vendor/github.com/coreos/go-systemd"]
+	path = vendor/github.com/coreos/go-systemd
+	url = https://github.com/coreos/go-systemd
